@@ -5,6 +5,8 @@ In order for the script to work correctly you need to put it in the same folder 
 
 **Example** : 
 
+ffmpeg-updater.py
+
 ffmpeg ↓
 * bin
 * doc
