@@ -12,8 +12,6 @@ class MyOpener(FancyURLopener): #ffmpeg site needs an User Agent to allow retrie
 myopener = MyOpener()
 
 def check_new_ver():
-	global new_ver
-	
 	url = "https://ffmpeg.zeranoe.com/builds/"
 	html = myopener.open(url).read()
 	soup = BeautifulSoup(html, "html5lib")
@@ -27,25 +25,25 @@ def check_new_ver():
 	
 	ver_find = text.find("Version")
 	new_ver = text[ver_find+59:ver_find+75]
+	return new_ver
 
 def check_curr_ver():
-	global curr_ver
-	
 	dir_list = str(listdir("./ffmpeg"))
 	ffmpeg_folder = dir_list.find("ffmpeg")
 	curr_ver = dir_list[ffmpeg_folder+7:ffmpeg_folder+23]
+	return curr_ver
 
 def new_ver_install():
-	if new_ver != curr_ver:
-		myopener.retrieve("https://ffmpeg.zeranoe.com/builds/" + ffmpeg_system[:5] + "/" + ffmpeg_system[6:] + "/ffmpeg-" + new_ver + "-" + ffmpeg_system + ".zip", "ffmpeg-" + new_ver + "-" + ffmpeg_system + ".zip")
-		with zipfile.ZipFile("ffmpeg-" + new_ver + "-" + ffmpeg_system +".zip","r") as zip_ref:
-			zip_ref.extractall("./")
-		remove("ffmpeg-" + new_ver + "-" + ffmpeg_system + ".zip")
-		rmtree("ffmpeg")
-		rename("ffmpeg-" + new_ver + "-" + ffmpeg_system, "ffmpeg")
-		open("./ffmpeg/ffmpeg-" + new_ver + "-" + ffmpeg_system, "w+")
+	myopener.retrieve("https://ffmpeg.zeranoe.com/builds/" + ffmpeg_system[:5] + "/" + ffmpeg_system[6:] + "/ffmpeg-" + new_ver + "-" + ffmpeg_system + ".zip", "ffmpeg-" + new_ver + "-" + ffmpeg_system + ".zip")
+	with zipfile.ZipFile("ffmpeg-" + new_ver + "-" + ffmpeg_system +".zip","r") as zip_ref:
+		zip_ref.extractall("./")
+	remove("ffmpeg-" + new_ver + "-" + ffmpeg_system + ".zip")
+	rmtree("ffmpeg")
+	rename("ffmpeg-" + new_ver + "-" + ffmpeg_system, "ffmpeg")
+	open("./ffmpeg/ffmpeg-" + new_ver + "-" + ffmpeg_system, "w+")
 
 if __name__ == "__main__":
-	check_new_ver()
-	check_curr_ver()
-	new_ver_install()
+	new_ver = check_new_ver()
+	curr_ver = check_curr_ver()
+	if new_ver != curr_ver:
+		new_ver_install()
