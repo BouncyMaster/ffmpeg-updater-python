@@ -17,5 +17,6 @@ ffmpeg ↓
 
 ## Requirements ##
 * bs4 (pip install beautifulsoup4)
+* html5lib (pip install html5lib)
 
 Tested on Windows 7 64bit
