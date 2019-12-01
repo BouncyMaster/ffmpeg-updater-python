@@ -1,7 +1,9 @@
 # ffmpeg-updater
-An Python script that checks for ffmpeg updates from https://ffmpeg.zeranoe.com/builds/
+An Python script that checks for ffmpeg updates from https://ffmpeg.zeranoe.com/builds/ and install them
 
-In order for the script to work correctly you need to put it in the same folder as the ffmpeg folder that should to have the name "ffmpeg" and also you need to create a file in ffmpeg folder with the name of the ffmpeg version
+~In order for the script to work correctly you need to put it in the same folder as the ffmpeg folder that should to have the name "ffmpeg" and also you need to create a file in ffmpeg folder with the name of the ffmpeg version~
+
+Or you can just start the script in a empty folder and it will do that for you.
 
 **Example** : 
 
